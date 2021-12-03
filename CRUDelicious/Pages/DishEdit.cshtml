@@ -1,0 +1,45 @@
+﻿@page "{id}"
+@model CRUDelicious.Pages.DishEditModel
+@{
+}
+
+
+<div class="container">
+    <form method="post">
+        @Html.HiddenFor(d => d.DishModel.DishId)
+        @Html.HiddenFor(d => d.DishModel.CreatedAt)
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td><label>Chef's Name</label></td>
+                        <td><label>Tastiness</label></td>
+                        <td><label>Description</label></td>
+                    </tr>
+                    <tr>
+                        <td><input asp-for="@this.Model.DishModel.ChefName" /></td>
+                        <td>
+                            <select asp-for="@this.Model.DishModel.Tastiness" asp-items="Model.likeness">
+                                <option value="">Pick one</option>
+                            </select>
+                        </td>
+                        <td><textarea asp-for="@this.Model.DishModel.Description"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><label>Name of Dish</label></td>
+                    </tr>
+                    <tr>
+                        <td><input asp-for="@this.Model.DishModel.DishName" /></td>
+                    </tr>
+                    <tr>
+                        <td><label># of Calories</label></td>
+                    </tr>
+                    <tr>
+                        <td><input asp-for="@this.Model.DishModel.Calories" /></td>
+                        <td><input type="submit" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>

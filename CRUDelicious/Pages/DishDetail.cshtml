@@ -1,0 +1,22 @@
+﻿@page "{id}"
+@model CRUDelicious.Pages.DishDetailModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using CRUDelicious.CORE
+@{
+}
+
+<div class="text-center">
+
+    <h1 >@this.Model.DishModel.DishName</h1>
+    <h3>@this.Model.DishModel.ChefName</h3>
+    <hr />
+</div>
+<div class="text-center">
+    <p>Description: @this.Model.DishModel.Description</p>
+    <p>Calories: @this.Model.DishModel.Calories</p>
+    <p>Tastiness: @this.Model.DishModel.Tastiness</p>
+    <div>
+        <a asp-page="/Dishedit" asp-route-id="@this.Model.DishModel.DishId">edit</a>
+    </div>
+</div>
+
