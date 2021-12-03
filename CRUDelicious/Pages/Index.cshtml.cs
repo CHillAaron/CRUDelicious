@@ -13,19 +13,19 @@ namespace CRUDelicious.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly DishService _dishService;
+        private readonly ChefService _chefService;
 
-        public List<Dishes> allDishes = new List<Dishes>();
+        public List<Chef> allChefs = new List<Chef>();
 
-        public IndexModel(ILogger<IndexModel> logger, DishService dishService)
+        public IndexModel(ILogger<IndexModel> logger, ChefService chefService)
         {
             _logger = logger;
-            _dishService = dishService;
+            _chefService = chefService;
         }
 
         public void OnGet()
         {
-            allDishes = _dishService.GetAll();
+            allChefs = _chefService.GetAll();
         }
     }
 }

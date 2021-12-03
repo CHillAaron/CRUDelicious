@@ -1,0 +1,26 @@
+﻿@page
+@model CRUDelicious.Pages.NewChefModel
+@{
+}
+<div class="container">
+    <form method="post">
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td><label>Chef's Name</label></td>
+                        <td><label>Age</label></td>
+                    </tr>
+                    <tr>
+                        <td><input asp-for="@this.Model.Input.ChefName" /></td>
+                        <td>
+                            <input asp-for="@this.Model.Input.Age" />
+                        </td>
+                        <td></td>
+                        <td><input type="submit" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>

@@ -4,27 +4,51 @@
 @using CRUDelicious.CORE
 @{
     ViewData["Title"] = "Home page";
-    this.Model.allDishes.Reverse();
 }
 
 <div class="text-center">
-    <h1>Welcome to CRUDelicious</h1>
+    <a href="NewChef">Add a Chef</a>
 </div>
 <div class="d-flex justify-content-around">
     <div>
-        <p>Check out some of the recent dishes!</p>
+        <p>Check out The Chef's</p>
         <hr />
-        @if (this.Model.allDishes == null || this.Model.allDishes.Count == 0)
+        @if (this.Model.allChefs == null || this.Model.allChefs.Count == 0)
         {
-            <p>There are No dishes</p>
+            <p>There are No Chefs</p>
         }
         else
         {
-            foreach (Dishes d in this.Model.allDishes)
-            {
-                <p><a asp-page="/DishDetail" asp-route-id="@d.DishId">@d.DishName</a> by @d.ChefName</p>
-            }
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Age</td>
+                        <td># of Dishes</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Chef c in this.Model.allChefs)
+                    {
+                    <tr>
+                        <td>@c.ChefName</td>
+                        <td>@c.Age</td>
+                        @if (@c.AllDishes.Count == 0 || @c.AllDishes.Count == null)
+                        {
+
+
+                            <td>No dish</td>
+                        }
+                        else
+                        {
+                            <td>@c.AllDishes.Count</td>
+                        }
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
         }
     </div>
-    <a href="NewDish">Add a Dish</a>
+    
 </div>

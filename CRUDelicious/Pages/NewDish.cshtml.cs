@@ -15,20 +15,28 @@ namespace CRUDelicious.Pages
         [BindProperty]
         public Dishes Input { get; set; }
         private DishService _dishService;
+        
         public List<SelectListItem> likeness =>
         Enumerable.Range(1, 5).Select(x => new SelectListItem
         {
             Value = x.ToString(),
             Text = x.ToString()
         }).ToList();
+        
+        public List<Chef> allChefs { get; set; }
 
         public NewDishModel(DishService dishService)
         {
             _dishService = dishService;
         }
+        
         public void OnGet()
         {
             Input = new Dishes();
+            allChefs = _dishService.GetAllChef().ToList();
+            Console.WriteLine(allChefs);
+
+
         }
         public IActionResult OnPost()
         {

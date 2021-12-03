@@ -33,6 +33,7 @@ namespace CRUDelicious
                 options.UseNpgsql();
             });
             services.AddScoped<DishService>();
+            services.AddScoped<ChefService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

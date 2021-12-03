@@ -1,0 +1,28 @@
+﻿@page
+@model CRUDelicious.Pages.DishModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using CRUDelicious.CORE
+@{
+}
+
+
+<div class="text-center">
+</div>
+<div class="d-flex justify-content-around">
+    <div>
+        <p>Check out some of the recent dishes!</p>
+        <hr />
+        @if (this.Model.allDishes == null || this.Model.allDishes.Count == 0)
+        {
+            <p>There are No dishes</p>
+        }
+        else
+        {
+            foreach (Dishes d in this.Model.allDishes)
+            {
+                <p><a asp-page="/DishDetail" asp-route-id="@d.DishId">@d.DishName</a> by </p>
+            }
+        }
+    </div>
+    <a href="NewDish">Add a Dish</a>
+</div>

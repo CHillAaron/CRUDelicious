@@ -16,7 +16,9 @@
                         <td><label>Description</label></td>
                     </tr>
                     <tr>
-                        <td><input asp-for="@this.Model.Input.ChefName" /></td>
+                        <td><select asp-for="@this.Model.Input.ChefId" asp-items="@(new SelectList(Model.allChefs, "ChefId", "ChefName"))">
+                            <option value="" selected disabled>Pick one</option>
+                        </select></td>
                         <td>
                             <select asp-for="@this.Model.Input.Tastiness" asp-items="Model.likeness">
                                 <option value="">Pick one</option>

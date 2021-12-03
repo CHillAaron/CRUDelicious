@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CRUDelicious.DAL.Migrations
 {
     [DbContext(typeof(CrudeliciousDbContext))]
-    [Migration("20211201201850_modifiedTime")]
-    partial class modifiedTime
+    [Migration("20211203210439_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,31 @@ namespace CRUDelicious.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            modelBuilder.Entity("CRUDelicious.CORE.Chef", b =>
+                {
+                    b.Property<int>("ChefId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ChefName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("ChefId");
+
+                    b.ToTable("Chefs");
+                });
 
             modelBuilder.Entity("CRUDelicious.CORE.Dishes", b =>
                 {
@@ -31,9 +56,8 @@ namespace CRUDelicious.DAL.Migrations
                     b.Property<int>("Calories")
                         .HasColumnType("integer");
 
-                    b.Property<string>("ChefName")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("ChefId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
@@ -54,7 +78,25 @@ namespace CRUDelicious.DAL.Migrations
 
                     b.HasKey("DishId");
 
+                    b.HasIndex("ChefId");
+
                     b.ToTable("Dishes");
+                });
+
+            modelBuilder.Entity("CRUDelicious.CORE.Dishes", b =>
+                {
+                    b.HasOne("CRUDelicious.CORE.Chef", "TheChef")
+                        .WithMany("AllDishes")
+                        .HasForeignKey("ChefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TheChef");
+                });
+
+            modelBuilder.Entity("CRUDelicious.CORE.Chef", b =>
+                {
+                    b.Navigation("AllDishes");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,6 +8,7 @@ namespace CRUDelicious.DAL
     public class CrudeliciousDbContext : DbContext
     {
         public DbSet<Dishes> Dishes { get; set; }
+        public DbSet<Chef> Chefs { get; set; }
         public CrudeliciousDbContext() : base()
         {
 

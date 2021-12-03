@@ -11,10 +11,12 @@ namespace CRUDelicious.DAL
     public class DishService
     { 
         CrudeliciousDbContext _context { get; } 
+        ChefService _chefService { get; }
 
-        public DishService(CrudeliciousDbContext context)
+        public DishService(CrudeliciousDbContext context, ChefService chefService)
         {
             _context = context;
+            _chefService = chefService;
         }
         public List<Dishes> GetAll()
         {
@@ -22,7 +24,8 @@ namespace CRUDelicious.DAL
         }
         public Dishes GetItem(int id)
         {
-            return _context.Dishes.Where(thisItem => thisItem.DishId == id).FirstOrDefault();
+            return _context.Dishes.Where(thisItem => thisItem.DishId == id).Include(thisItem=> thisItem.ChefId)
+                 .FirstOrDefault();
         }
         public void AddItem(Dishes newItem)
         {
@@ -38,6 +41,11 @@ namespace CRUDelicious.DAL
         {
             _context.Dishes.Remove(GetItem(id));
             _context.SaveChanges();
+        }
+
+        public List<Chef> GetAllChef()
+        {
+            return _chefService.GetAll();
         }
     }
 }
